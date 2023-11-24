@@ -1,15 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <menu-transitions/>
+    <router-view v-slot="{Component}">
+      <transition name="route" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MenuTransitions from './components/MenuTransitions.vue'
+
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+
+    MenuTransitions
   }
 }
 </script>
@@ -20,7 +29,22 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #030303;
+  
+}
+/* route transitions */
+.route-enter-from{
+  opacity: 0;
+  transform: translateX(100px);
+}
+.route-enter-active{
+  transition: all 0.3s ease-out;
+}
+.route-leave-to{
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.route-leave-active{
+  transition: all 0.3s ease-in ;
 }
 </style>
